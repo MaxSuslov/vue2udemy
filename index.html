@@ -9,18 +9,9 @@
 </head>
 <body>
   <div id="app">
-    <button v-on:click="increase(2, $event)">Click me (+2)!</button>
-    <!-- simple JS commands can be executed directly here -->
-    <button v-on:click="counter++">Click me (+1)!</button>
-    <!-- And here as an example if we write counter*2 it will multiply the values by 2 -->
-    <p>{{ counter*2 }}</p>
-    <!-- We can even write simple ternary operators directly here -->
-    <p>{{ counter*2 > 10 ? "Greater than 10" : "Smaller than 10"}}</p>
-    <p v-on:mousemove="updateCoordinates">
-      Coordinates: {{ x }} / {{ y }}
-      - <span v-on:mousemove.stop="">DEAD SPOT</span>
-    </p>
-    <input type="text" v-on:keyup.enter.space="alertMe">
+    <!-- If you want to update the data bi-directional (not only in the data property, but everywhere it used in our code). v-model:set up the 2-way binding for this input field, and in the quotation marks “the property you want to bind in both directions” -->
+    <input type="text" v-model="name">
+    <p>{{ name }}</p>
   </div>
   <script src="js/index.js"></script>
 </body>
