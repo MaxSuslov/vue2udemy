@@ -12,6 +12,9 @@ new Vue({
     updateCoordinates: function(event) {
     this.x = event.clientX;
     this.y = event.clientY;
+    },
+    alertMe: function() {
+      alert("You pressed the Enter or Space key!!");
     }
   }
 });
