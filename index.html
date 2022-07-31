@@ -9,10 +9,12 @@
 </head>
 <body>
   <div id="app">
-    <button v-on:click="increase">Increase</button>
-    <button v-on:click="decrease">Decrease</button>
+    <button v-on:click="counter++">Increase</button>
+    <button v-on:click="counter--">Decrease</button>
+    <!-- Looks better, but if we have more properties (like the second counter), it will rerun all other functions unneeded for it and consume unnessessarily more resources  -->
+    <button v-on:click="secondCounter++">Increase 2nd counter</button>
     <p>Counter: {{ counter }}</p>
-    <p>Result: {{ result }}</p>
+    <p>Result: {{ result() }}</p>
   </div>
   <script src="js/index.js"></script>
 </body>
