@@ -9,9 +9,10 @@
 </head>
 <body>
   <div id="app">
-    <!-- If you want to update the data bi-directional (not only in the data property, but everywhere it used in our code). v-model:set up the 2-way binding for this input field, and in the quotation marks “the property you want to bind in both directions” -->
-    <input type="text" v-model="name">
-    <p>{{ name }}</p>
+    <button v-on:click="increase">Increase</button>
+    <button v-on:click="decrease">Decrease</button>
+    <p>Counter: {{ counter }}</p>
+    <p>Result: {{ result }}</p>
   </div>
   <script src="js/index.js"></script>
 </body>
