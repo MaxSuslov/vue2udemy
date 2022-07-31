@@ -5,16 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vue-2</title>
+  <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0/dist/vue.js"></script>
 </head>
 <body>
   <div id="app">
-    <button v-on:click="counter++">Increase</button>
-    <button v-on:click="counter--">Decrease</button>
-    <!-- Looks better, but if we have more properties (like the second counter), it will rerun all other functions unneeded for it and consume unnessessarily more resources  -->
-    <button v-on:click="secondCounter++">Increase 2nd counter</button>
-    <p>Counter: {{ counter }} | {{ secondCounter }}</p>
-    <p>Result: {{ result() }} | {{ output }}</p>
+    <div 
+      class="demo" 
+      @click="attachRed = !attachRed"
+      :class="{red: attachRed}">Red</div>
+    <div class="demo" @click="attachGreen = !attachGreen" :class="{green: attachGreen}">Green</div>
+    <div class="demo" @click="attachBlue = !attachBlue" :class="{blue: attachBlue}">Blue</div>
   </div>
   <script src="js/index.js"></script>
 </body>
