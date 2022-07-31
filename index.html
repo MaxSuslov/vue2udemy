@@ -13,8 +13,8 @@
     <button v-on:click="counter--">Decrease</button>
     <!-- Looks better, but if we have more properties (like the second counter), it will rerun all other functions unneeded for it and consume unnessessarily more resources  -->
     <button v-on:click="secondCounter++">Increase 2nd counter</button>
-    <p>Counter: {{ counter }}</p>
-    <p>Result: {{ result() }}</p>
+    <p>Counter: {{ counter }} | {{ secondCounter }}</p>
+    <p>Result: {{ result() }} | {{ output }}</p>
   </div>
   <script src="js/index.js"></script>
 </body>
