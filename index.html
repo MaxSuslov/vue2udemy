@@ -13,9 +13,9 @@
     <div 
       class="demo" 
       @click="attachRed = !attachRed"
-      :class="{red: attachRed}">Red</div>
-    <div class="demo" @click="attachGreen = !attachGreen" :class="{green: attachGreen}">Green</div>
-    <div class="demo" @click="attachBlue = !attachBlue" :class="{blue: attachBlue}">Blue</div>
+      :class="divClasses">Redish</div>
+    <div class="demo" :class="{red: attachRed}">Green</div>
+    <div class="demo">Blue</div>
   </div>
   <script src="js/index.js"></script>
 </body>
