@@ -13,9 +13,12 @@
     <div 
       class="demo" 
       @click="attachRed = !attachRed"
-      :class="divClasses">Redish</div>
-    <div class="demo" :class="{red: attachRed}">Green</div>
-    <div class="demo">Blue</div>
+      :class="divClasses"></div>
+    <div class="demo" :class="{red: attachRed}"></div>
+    <!-- By default the color will be that from input (it is binded to it), but if the input is empty, the red=true/false will be applied after the click on the first div like in the second one -->
+    <div class="demo" :class="[color, {red: attachRed}]"></div>
+    <hr>
+    <input type="text" v-model="color">
   </div>
   <script src="js/index.js"></script>
 </body>
