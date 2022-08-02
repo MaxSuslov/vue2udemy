@@ -4,19 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue-2</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Task 1</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0/dist/vue.js"></script>
 </head>
 <body>
-  <div id="app">
-    <div class="demo" :style="{backgroundColor: color}"></div>
-    <div class="demo" :style="myStyle"></div>
-    <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
-    <hr>
-    <input type="text" v-model="color">
-    <input type="text" v-model="width">
-  </div>
-  <script src="js/index.js"></script>
+  <div id="exercise">
+    <!-- 1) Fill the <p> below with your Name and Age - using Interpolation -->
+     <p>VueJS is pretty cool - {{ name }} ({{ age }})</p>
+     <!-- 2) Output your age, multiplied by 3 -->
+     <p>Max's age * 3 = {{ age*3 }}</p>
+     <!-- 3) Call a function to output a random float between 0 and 1 (Math.random()) -->
+     <p>Random float between 0 and 1: {{ randomFloat() }}</p>
+     <!-- 4) Search any image on Google and output it here by binding the "src" attribute -->
+     <div>
+         <img style="width:100px;height:100px" :src="mainkun">
+     </div>
+     <!-- 5) Pre-Populate this input with your name (set the "value" attribute) -->
+     <div>
+         <input type="text" :value="name">
+     </div>
+ </div>
+ <script src="js/index.js"></script>
 </body>
 </html>
