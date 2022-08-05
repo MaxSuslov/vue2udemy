@@ -10,15 +10,15 @@
   </head>
   <body>
     <div id="app">
-      <p v-if="show">You can see me. <span>Hello!</span></p>
-      <p v-else>Now you can see me!</p>
-      <p v-show="show">Do you also see me?</p>
-      <template v-if="show">
-        <h1>I'm a heading</h1>
-        <p>I'm a paragraph</p>
+      <ul>
+        <li v-for="(ingredient, i) in ingredients">
+          {{ ingredient }} ({{ i }})
+        </li>
+      </ul>
+      <template v-for="(item, index) in ingredients">
+        <h3>{{ item }}</h3>
+        <p>{{ index }}</p>
       </template>
-      <p>Can you see me?</p>
-      <button @click="show = !show">Show/hide</button>
     </div>
     <script src="js/index.js"></script>
   </body>
