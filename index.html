@@ -4,36 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue-2</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Exercise - conditionals and lists</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0/dist/vue.js"></script>
   </head>
   <body>
-    <div id="app">
-      <ul>
-        <li v-for="(ingredient, i) in ingredients">
-          {{ ingredient }} ({{ i }})
-        </li>
-      </ul>
-      <hr />
-      <ul v-for="person in persons">
-        <li>
-          <div v-for="(value, key, index) in person">
-            {{ key }}: {{ value }} ({{ index }})
-          </div>
-        </li>
-      </ul>
-      <!-- Pushses new items to the array, and they are automatically tracked by Vue and listed in the output above -->
-      <button @click="ingredients.push('spices')">Add new</button>
+    <div id="exercise">
+      <!-- 1) Hook up the button to toggle the display of the two paragraphs. Use both v-if and v-show and inspect the elements to see the difference -->
+      <div>
+        <button @click="show = !show">Toggle</button>
+        <p v-if="show">You either see me ...</p>
+        <!-- is hidden until the above paragraph is shown -->
+        <p v-else>...or me</p>
+        <p v-show="show">You either see me ...</p>
+        <!-- v-show doesn't work with v-else, so we use here the opposite value to toggle the paragraphs -->
+        <p v-show="!show">...or me</p>
+      </div>
 
-      <!-- Simple iteration throug a range of numbers (1-10) -->
-      <span v-for="n in 10">{{ n }}</span>
       <hr />
-      <template v-for="(item, index) in ingredients">
-        <h3>{{ item }}</h3>
-        <p>{{ index }}</p>
-      </template>
+      <!-- 2) Output an <ul> of array elements of your choice. Also print the index of each element. -->
+      <ul>
+        <li v-for="(ingredient, index) in ingredients">
+          {{ index+1 }}. {{ ingredient }}
+        </li>
+      </ul>
+
+      <hr />
+      <!-- 3) Print all key-value pairs of the following object: {title: 'Lord of the Rings', author: 'J.R.R. Tolkiens', books: '3'}. Also print the index of each item. -->
+      <ul>
+        <li v-for="(value, key, index) in myObject">
+          #{{ index+1 }}- {{ key }}: {{ value }}
+        </li>
+      </ul>
+
+      <hr />
+      <!-- 4) Print the following object (only the values) and also create a nested loop for the array: {name: 'TESTOBJECT', data: [1.67, 1.33, 0.98, 2.21]} (hint: use v-for and v-if to achieve this) -->
+      <ul>
+        <li v-for="value in testData">
+          <template v-if="Array.isArray(value)">
+            <div v-for="element in value">{{ element }}</div>
+          </template>
+          <template v-else>
+            <div>{{ value }}</div>
+          </template>
+        </li>
+      </ul>
     </div>
-    <script src="js/index.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
