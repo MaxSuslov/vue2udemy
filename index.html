@@ -15,6 +15,20 @@
           {{ ingredient }} ({{ i }})
         </li>
       </ul>
+      <hr />
+      <ul v-for="person in persons">
+        <li>
+          <div v-for="(value, key, index) in person">
+            {{ key }}: {{ value }} ({{ index }})
+          </div>
+        </li>
+      </ul>
+      <!-- Pushses new items to the array, and they are automatically tracked by Vue and listed in the output above -->
+      <button @click="ingredients.push('spices')">Add new</button>
+
+      <!-- Simple iteration throug a range of numbers (1-10) -->
+      <span v-for="n in 10">{{ n }}</span>
+      <hr />
       <template v-for="(item, index) in ingredients">
         <h3>{{ item }}</h3>
         <p>{{ index }}</p>
