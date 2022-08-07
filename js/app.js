@@ -28,7 +28,15 @@ new Vue({
       this.monsterAttacks();
       this.checkWin();
     },
-    heal: function () {},
+    heal: function () {
+      if (this.playerHealth <= 90) {
+        this.playerHealth += 10;
+      } else {
+        this.playerHealth = 100;
+      }
+      // After we healed ourselves instead of attack, monster shell attack as the next step
+      this.monsterAttacks();
+    },
     giveUp: function () {},
     monsterAttacks: function () {
       this.playerHealth -= this.calculateDamage(5, 12);
