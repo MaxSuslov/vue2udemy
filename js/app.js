@@ -16,7 +16,6 @@ new Vue({
       if (this.checkWin()) {
         return;
       }
-
       this.monsterAttacks();
       this.checkWin();
     },
@@ -37,7 +36,9 @@ new Vue({
       // After we healed ourselves instead of attack, monster shell attack as the next step
       this.monsterAttacks();
     },
-    giveUp: function () {},
+    giveUp: function () {
+      this.gameIsRunning = false;
+    },
     monsterAttacks: function () {
       this.playerHealth -= this.calculateDamage(5, 12);
     },
