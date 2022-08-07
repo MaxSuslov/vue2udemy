@@ -12,21 +12,27 @@ new Vue({
       this.monsterHealth = 100;
     },
     attack: function () {
-      let damage = this.calculateDamage(3, 10);
-      this.monsterHealth -= damage;
+      this.monsterHealth -= this.calculateDamage(3, 10);
       if (this.checkWin()) {
         return;
       }
 
-      this.playerHealth -= this.calculateDamage(5, 12);
+      this.monsterAttacks();
       this.checkWin();
     },
-    specialAttack: function () {},
+    specialAttack: function () {
+      this.monsterHealth -= this.calculateDamage(10, 20);
+      if (this.checkWin()) {
+        return;
+      }
+      this.monsterAttacks();
+      this.checkWin();
+    },
     heal: function () {},
     giveUp: function () {},
-    // Math.random() returns a random float between 0 and 1 (not including 1), so it would be 0-0.999999, multiplied by max = 0-9.999999, +1 = 1-10,99999
-    // Math.floor() sets 10.9999 to 10
-    // Math.max(returns the highest argument) - use 1-10 but if lower than min, use min
+    monsterAttacks: function () {
+      this.playerHealth -= this.calculateDamage(5, 12);
+    },
     calculateDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
     },
