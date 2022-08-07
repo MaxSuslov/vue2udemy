@@ -1,89 +1,43 @@
-new Vue({
-  el: "#app",
+// vm is picked up here for "view model / Vue model", just use an arbitrary variable name
+let vm1 = new Vue({
+  el: "#app1",
   data: {
-    playerHealth: 100,
-    monsterHealth: 100,
-    gameIsRunning: false,
-    turns: [],
+    title: "The VueJS Instance",
+    showParagraph: false,
   },
   methods: {
-    startGame: function () {
-      this.gameIsRunning = true;
-      this.playerHealth = 100;
-      this.monsterHealth = 100;
-      // Clearing the log
-      this.turns = [];
+    show: function () {
+      this.showParagraph = true;
+      this.updateTitle("The VueJS Instance (Updated)");
     },
-    attack: function () {
-      let damage = this.calculateDamage(3, 10);
-      this.monsterHealth -= damage;
-      this.turns.unshift({
-        isPlayer: true,
-        text: "Player hits monster for " + damage,
-      });
-      if (this.checkWin()) {
-        return;
-      }
-      this.monsterAttacks();
-      this.checkWin();
+    updateTitle: function (title) {
+      this.title = title;
     },
-    specialAttack: function () {
-      damage = this.calculateDamage(10, 20);
-      this.monsterHealth -= damage;
-      this.turns.unshift({
-        isPlayer: true,
-        text: "Player hits monster hard for " + damage,
-      });
-      if (this.checkWin()) {
-        return;
-      }
-      this.monsterAttacks();
-      this.checkWin();
+  },
+  computed: {
+    lowercaseTitle: function () {
+      return this.title.toLowerCase();
     },
-    heal: function () {
-      if (this.playerHealth <= 90) {
-        this.playerHealth += 10;
-        this.turns.unshift({
-          isPlayer: true,
-          text: "Player heals for 10",
-        });
-      } else {
-        this.playerHealth = 100;
-      }
-      // After we healed ourselves instead of attack, monster shell attack as the next step
-      this.monsterAttacks();
+  },
+  watch: {
+    title: function (value) {
+      alert("Title changed, new value: " + value);
     },
-    giveUp: function () {
-      this.gameIsRunning = false;
-    },
-    monsterAttacks: function () {
-      damage = this.calculateDamage(5, 12);
-      this.playerHealth -= damage;
-      this.turns.unshift({
-        isPlayer: false,
-        text: "Monster hits player for " + damage,
-      });
-    },
-    calculateDamage: function (min, max) {
-      return Math.max(Math.floor(Math.random() * max) + 1, min);
-    },
-    checkWin: function () {
-      if (this.monsterHealth <= 0) {
-        if (confirm("You won! New game?")) {
-          this.startGame();
-        } else {
-          this.gameIsRunning = false;
-        }
-        return true;
-      } else if (this.playerHealth <= 0) {
-        if (confirm("You lost! New game?")) {
-          this.startGame();
-        } else {
-          this.gameIsRunning = false;
-        }
-        return true;
-      }
-      return false;
+  },
+});
+
+setTimeout(function () {
+  vm1.title = "Changed by Timer!";
+}, 3000);
+
+let vm2 = new Vue({
+  el: "#app2",
+  data: {
+    title: "The second instance",
+  },
+  methods: {
+    changeTitle: function () {
+      vm1.title = "Changed!";
     },
   },
 });
