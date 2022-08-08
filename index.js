@@ -1,17 +1,22 @@
-// var data = {
-//   status: "Critical",
-// };
+// This way a component is declared globally and accessible from the both Vue instances (there will be the same content doubled)
+// Vue.component("my-cmp", {
+//   data: function () {
+//     return { status: "Critical" };
+//   },
+//   template:
+//     "<p>Server status: {{ status }} (<button @click='changeStatus'>Change</button>)</p>",
+//   methods: {
+//     changeStatus: function () {
+//       this.status = "Normal";
+//     },
+//   },
+// });
 
-Vue.component("my-cmp", {
-  // data should be a function and return an Object, if used inside of a component. So it will change only the current object to which the click on button "Change" is applied (not in both places at the same time!)
+// Another way is to register components locally, they will be accessible only from the particular Vue instance
+let cmp = {
   data: function () {
     return { status: "Critical" };
   },
-
-  // this cheat will work, but will change the data in both places (pointing to the same object - data source)
-  // data: function () {
-  //   return data;
-  // },
   template:
     "<p>Server status: {{ status }} (<button @click='changeStatus'>Change</button>)</p>",
   methods: {
@@ -19,8 +24,15 @@ Vue.component("my-cmp", {
       this.status = "Normal";
     },
   },
-});
-
+};
 new Vue({
   el: "#app",
+  components: {
+    "my-cmp": cmp,
+  },
+});
+
+// Even if there are the same tags inside of #app2 (<my-cmp>), the component is registered locally only in the first instance and hence is not accessible from this second instance, nothing will be displayed here
+new Vue({
+  el: "#app2",
 });
