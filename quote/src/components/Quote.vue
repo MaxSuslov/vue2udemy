@@ -15,4 +15,8 @@ div {
   margin: 30 px auto;
   text-align: center;
 }
+
+h2 {
+  color: red;
+}
 </style>
