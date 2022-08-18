@@ -13,6 +13,12 @@ export default {
       counter: 0,
     };
   },
+  // destroyed() {
+  //   console.log("Destroyed!");
+  // },
+  destroyed: function () {
+    console.log("Destroyed!");
+  },
 };
 </script>
 

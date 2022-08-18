@@ -7,7 +7,9 @@
         <button @click="selectedComponent = 'appNew'">New</button>
         <p>{{ selectedComponent }}</p>
         <!-- <component> tag is eserved by Vue, :is="dynamicData" is required -->
-        <component :is="selectedComponent">Default content</component>
+        <keep-alive>
+          <component :is="selectedComponent">Default content</component>
+        </keep-alive>
         <!-- <app-quote>
           <h2 slot="title">{{ quoteTitle }}</h2>
           <p>What a wonderful quote</p>
