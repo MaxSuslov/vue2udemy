@@ -14,7 +14,8 @@
 export default {
   methods: {
     navigateToHome() {
-      this.$router.push({ path: "/" });
+        // we can pass an object here, e.g. a named route
+      this.$router.push({ name: 'home' });
     },
   },
 };

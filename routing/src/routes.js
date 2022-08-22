@@ -7,7 +7,8 @@ import Home from './components/Home.vue';
 export const routes = [
   {
     path: '',
-    component: Home
+    component: Home,
+    name: 'home'
   },
   {
     path: '/user',
@@ -15,7 +16,7 @@ export const routes = [
     children: [
       { path: '', component: UserStart },
       { path: ':id', component: UserDetail },
-      { path: ':id/edit', component: UserEdit }
+      { path: ':id/edit', component: UserEdit, name: 'userEdit' }
     ]
   }
 ];
