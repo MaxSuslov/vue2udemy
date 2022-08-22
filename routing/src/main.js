@@ -7,7 +7,8 @@ Vue.use(VueRouter);
 
 // routes is a shortcut for routes: routes
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 });
 
 new Vue({
