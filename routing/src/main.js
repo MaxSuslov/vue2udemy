@@ -8,7 +8,18 @@ Vue.use(VueRouter);
 // routes is a shortcut for routes: routes
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
+  scrollBehavior(to, from, savedPosition) {
+    // if the user comes by clicking "back" button, we should better bring him to where he left
+    if (savedPosition) {
+      return savedPosition;
+    }
+    // if the hash (id) is defined in the destination
+    if (to.hash) {
+      return { selector: to.hash };
+    }
+    // return { x: 0, y: 700 };
+  }
 });
 
 new Vue({
