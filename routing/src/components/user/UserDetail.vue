@@ -25,5 +25,13 @@ export default {
             }
         }
     },
+    beforeRouteEnter(to, from, next) {
+        if (true) {
+            // checking if the user is authenticated, here is true to go without check
+            next();
+        } else {
+            next(false);
+        }
+    }
 }
 </script>
