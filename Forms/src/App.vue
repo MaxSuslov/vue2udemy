@@ -103,10 +103,17 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 from-group">
                     <label for="priority">Priority</label>
+                    <!-- v-model in drop-down is used not on the <option>, but on <select> itself! -->
                     <select
                             id="priority"
-                            class="form-control">
-                        <option></option>
+                            class="form-control"
+                            v-model="selectedPriority">
+                        <!-- :selected="priority == 'Medium'" is to set the default value, but it will work only if we don't use v-model in <select>, so it will be overwritten by property from v-model! -->
+                        <option 
+                        v-for="priority in priorities"
+                        :selected="priority == 'Medium'"
+                        >{{ priority }}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -139,7 +146,7 @@
                             <li v-for="item in sendMail">{{ item }}</li>
                         </ul>
                         <p>Gender: {{ gender }}</p>
-                        <p>Priority:</p>
+                        <p>Priority: {{ selectedPriority }}</p>
                     </div>
                 </div>
             </div>
@@ -163,7 +170,10 @@ import FullName from './FullName.vue';
                 submitted: false,
                 message: 'Please write your message here',
                 sendMail: [], 
-                gender: 'Male'
+                gender: 'Male',
+                priorities: ['High', 'Medium', 'Low'],
+                // another way to setup the defauld value (via v-model)
+                selectedPriority: 'High'
             }
         },
         components: {
