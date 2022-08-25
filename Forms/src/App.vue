@@ -11,8 +11,10 @@
 
                     <div class="form-group">
                         <label for="email">Mail</label>
+                        <!-- Instead of v-model="userData.email" we manually create the same behaviour in the input to show how v-model works behind the scenes -->
                         <input
-                                v-model="userData.email"
+                                :value="userData.email"
+                                @input="userData.email = $event.target.value"
                                 type="text"
                                 id="email"
                                 class="form-control">
@@ -117,6 +119,11 @@
                     </select>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <app-switch v-model="dataSwitch"></app-switch>
+                </div>
+            </div>
             <hr>
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -156,6 +163,7 @@
 
 <script>
 import FullName from './FullName.vue';
+import Switch from './Switch.vue'
 
     export default {
         data() {
@@ -173,11 +181,13 @@ import FullName from './FullName.vue';
                 gender: 'Male',
                 priorities: ['High', 'Medium', 'Low'],
                 // another way to setup the defauld value (via v-model)
-                selectedPriority: 'High'
+                selectedPriority: 'High',
+                dataSwitch: true
             }
         },
         components: {
-            appFullName: FullName
+            appFullName: FullName,
+            appSwitch: Switch
         }
     }
 </script>
