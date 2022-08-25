@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <!-- <form v-if="!submitted"> -->
         <form>
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -54,7 +53,7 @@
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
                     <label for="message">Message</label><br>
                     <!-- Interpolation between <textarea>{{ test }}</textarea> doesn't work!-->
-                    <textarea style="white-space: pre"
+                    <textarea
                             id="message"
                             rows="5"
                             class="form-control"
@@ -128,14 +127,15 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <button
-                            type="submit" class="btn btn-primary" @click.prevent="submitted = true">Submit!
+                            type="submit" class="btn btn-primary" 
+                            @click.prevent="submitted">
+                            Submit!
                     </button>
                 </div>
             </div>
         </form>
         <hr>
-        <!-- <div class="row" v-if="submitted"> -->
-        <div class="row">
+        <div class="row" v-if="isSubmitted">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -146,7 +146,7 @@
                         <p>Mail: {{ userData.email }}</p>
                         <p>Password: {{ userData.password }}</p>
                         <p>Age: {{ userData.age }}</p>
-                        <p>Message: {{ message }}</p>
+                        <p style="white-space: pre">Message: {{ message }}</p>
                         <p><strong>Store in Database? {{ storeData }}</strong></p>
                         <p><strong>Send Mail?</strong></p>
                         <ul>
@@ -176,19 +176,24 @@ import Switch from './Switch.vue'
                 age: 44,
                 },
                 storeData: 'Yes',
-                submitted: false,
                 message: 'Please write your message here',
                 sendMail: [], 
                 gender: 'Male',
                 priorities: ['High', 'Medium', 'Low'],
                 // another way to setup the defauld value (via v-model)
                 selectedPriority: 'High',
-                dataSwitch: true
+                dataSwitch: true,
+                isSubmitted: false
             }
         },
         components: {
             appFullName: FullName,
             appSwitch: Switch
+        }, 
+        methods: {
+            submitted() {
+                this.isSubmitted = true;
+            }
         }
     }
 </script>
