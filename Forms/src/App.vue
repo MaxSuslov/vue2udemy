@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <form v-if="!submitted">
+        <!-- <form v-if="!submitted"> -->
+        <form>
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <h1>Submit your data</h1>
@@ -62,6 +63,54 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <div class="form-group">
+                        <label for="sendmail">
+                            <input
+                                    type="checkbox"
+                                    id="sendmail"
+                                    value="SendMail"
+                                    v-model="sendMail"> Receive Emails
+                        </label>
+                        <label for="newsletter">
+                            <input
+                                    type="checkbox"
+                                    id="Newsletter"
+                                    value="Newsletter" 
+                                    v-model="sendMail"> Newsletter Sign-up
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
+                    <label for="male">
+                        <input
+                                type="radio"
+                                id="male"
+                                value="Male"> Male
+                    </label>
+                    <label for="female">
+                        <input
+                                type="radio"
+                                id="female"
+                                value="Female"> Female
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 from-group">
+                    <label for="priority">Priority</label>
+                    <select
+                            id="priority"
+                            class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <button
                             type="submit" class="btn btn-primary" @click.prevent="submitted = true">Submit!
                     </button>
@@ -69,7 +118,8 @@
             </div>
         </form>
         <hr>
-        <div class="row" v-if="submitted">
+        <!-- <div class="row" v-if="submitted"> -->
+        <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -82,6 +132,12 @@
                         <p>Age: {{ userData.age }}</p>
                         <p>Message: {{ message }}</p>
                         <p><strong>Store in Database? {{ storeData }}</strong></p>
+                        <p><strong>Send Mail?</strong></p>
+                        <ul>
+                            <li v-for="item in sendMail">{{ item }}</li>
+                        </ul>
+                        <p>Gender:</p>
+                        <p>Priority:</p>
                     </div>
                 </div>
             </div>
@@ -103,7 +159,8 @@ import FullName from './FullName.vue';
                 },
                 storeData: 'Yes',
                 submitted: false,
-                message: 'Please write your message here'
+                message: 'Please write your message here',
+                sendMail: []
             }
         },
         components: {
