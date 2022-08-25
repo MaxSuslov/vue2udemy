@@ -2,22 +2,23 @@
     <div>
         <div
                 id="on"
-                @click="isOn = true"
-                :class="{active: isOn}">On</div>
+                @click="switched(true)"
+                :class="{active: value}">On</div>
         <div
                 id="off"
-                @click="isOn = false"
-                :class="{active: !isOn}">Off</div>
+                @click="switched(false)"
+                :class="{active: !value}">Off</div>
     </div>
 </template>
 
 <script>
     export default {
-        data() {
-            return {
-                isOn: true
-            };
-        },
+      props: ['value'], 
+      methods: {
+        switched(isOn) {
+          this.$emit('input', isOn);
+        }
+      }
     }
 </script>
 
