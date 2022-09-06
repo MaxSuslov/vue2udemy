@@ -17,7 +17,8 @@
                 <!-- Do the same as in Exercises 1 & 2, now with Computed Properties -->
                 <h3>Computed properties</h3>
                 <p>{{ reversedTextComputed }}</p>
-                <p>{{ calculateLengthComputed }}</p>
+                <h4>Computed property imported as a mixin</h4>
+                <p>{{ lengthAware }}</p>
                 <!-- Exercise 4 -->
                 <!-- Share the Computed Property rebuilding Exercise 2 via a Mixin -->
             </div>
@@ -26,12 +27,15 @@
 </template>
 
 <script>
+    import {lengthAwareMixin} from './lengthAwareMixin';
+
     export default {
         filters: {
             reverse(value) {
                 return value.split("").reverse().join("");
             }
         }, 
+        mixins: [lengthAwareMixin],
         data() {
             return {
                 firstText: 'First Text',
@@ -41,9 +45,6 @@
         computed: {
             reversedTextComputed() {
                 return this.firstText.split("").reverse().join("");
-            },
-            calculateLengthComputed() {
-                return this.secondText + ' (' + this.secondText.length + ')';
             }
         }
     }
