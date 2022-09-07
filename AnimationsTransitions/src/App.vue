@@ -7,10 +7,14 @@
                 <button class="btn btn-primary" @click="show = !show">Show Alert</button>
                 <br><br>
                 <transition name="fade">
-                    <div class="alert alert-info" v-if="show">Using Transition CSS classes</div>
+                    <!-- We can use v-show instead of v-if -->
+                    <div class="alert alert-info" v-show="show">Using Transition CSS classes</div>
                 </transition>
                 <transition name="slide" type="animation">
                     <div class="alert alert-info" v-if="show">Using CSS Animations</div>
+                </transition>
+                <transition name="fade" appear>
+                    <div class="alert alert-info" v-if="show">Initial animation</div>
                 </transition>
             </div>
         </div>
@@ -21,7 +25,7 @@
     export default {
         data() {
             return {
-                show: false
+                show: true
             }
         }
     }
