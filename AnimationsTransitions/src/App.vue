@@ -13,8 +13,13 @@
                 <transition name="slide" type="animation">
                     <div class="alert alert-info" v-if="show">Using CSS Animations</div>
                 </transition>
-                <transition name="fade" appear>
-                    <div class="alert alert-info" v-if="show">Initial animation</div>
+                <!-- We don't use name="fade" here, but you can define e.g. enter-class="fade-enter" - anyClass-enter, leave-class="anotherClass-leave" etc -->
+                <transition 
+                appear 
+                enter-active-class="animate__animated animate__bounce" 
+                leave-active-class="animate__animated animate__heartBeat"
+                >
+                    <div class="alert alert-info" v-if="show">Animate.css</div>
                 </transition>
             </div>
         </div>
