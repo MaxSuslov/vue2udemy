@@ -7,7 +7,10 @@
                 <button class="btn btn-primary" @click="show = !show">Show Alert</button>
                 <br><br>
                 <transition name="fade">
-                    <div class="alert alert-info" v-if="show">This is some info</div>
+                    <div class="alert alert-info" v-if="show">Using Transition CSS classes</div>
+                </transition>
+                <transition name="slide">
+                    <div class="alert alert-info" v-if="show">Using CSS Animations</div>
                 </transition>
             </div>
         </div>
@@ -42,5 +45,38 @@
     .fade-leave-active {
         transition: opacity 1s;
         opacity: 0;
+    }
+    /* Sliding effect using CSS animations */
+    .slide-enter {
+        /* No need to define it here as we set it in the keyframes */
+        /* transform: translateY(20px); */
+    }
+    /* slide-in refers to the slide-in keyframe */
+    /* forwards is to keep the element in the finish position and not snap back to start */
+    .slide-enter-active {
+        animation: slide-in 1s ease-out forwards;
+    }
+    .slide-leave {
+    }
+    .slide-leave-active {
+        animation: slide-out 1s ease-out forwards;
+
+    }
+
+    @keyframes slide-in {
+        from {
+            transform: translateY(20px);
+        }
+        to {
+            transform: translateY(0px);
+        }
+    }
+    @keyframes slide-out {
+        from {
+            transform: translateY(0px);
+        }
+        to {
+            transform: translateY(20px);
+        }
     }
 </style>
