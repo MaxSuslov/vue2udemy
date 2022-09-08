@@ -4,20 +4,33 @@
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <h1>Animations</h1>
                 <hr>
+                                <p>Transitions options (first pop-up):</p>
+
+                <select v-model='alertAnimation' class='form-control'>
+                    <option value="fade">Fade</option>
+                    <option value="slide">Slide</option>
+                </select>
+                <br>
+                <p>animate.css options (last pop-up):</p>
+                <select v-model='animateCss' class='form-control'>
+                    <option value="animate__animated animate__bounce">Bounce</option>
+                    <option value="animate__animated animate__heartBeat">HeartBeat</option>
+                </select>
+                <br><br>
                 <button class="btn btn-primary" @click="show = !show">Show Alert</button>
                 <br><br>
-                <transition name="fade">
+                <transition :name="alertAnimation">
                     <!-- We can use v-show instead of v-if -->
                     <div class="alert alert-info" v-show="show">Using Transition CSS classes</div>
                 </transition>
-                <transition name="slide" type="animation">
+                <transition :name="alertAnimation" type="animation">
                     <div class="alert alert-info" v-if="show">Using CSS Animations</div>
                 </transition>
                 <!-- We don't use name="fade" here, but you can define e.g. enter-class="fade-enter" - anyClass-enter, leave-class="anotherClass-leave" etc -->
                 <transition 
                 appear 
-                enter-active-class="animate__animated animate__bounce" 
-                leave-active-class="animate__animated animate__heartBeat"
+                :enter-active-class="animateCss" 
+                :leave-active-class="animateCss"
                 >
                     <div class="alert alert-info" v-if="show">Animate.css</div>
                 </transition>
@@ -30,7 +43,9 @@
     export default {
         data() {
             return {
-                show: true
+                show: true, 
+                alertAnimation: 'fade',
+                animateCss: 'animate__animated animate__bounce'
             }
         }
     }
@@ -79,18 +94,18 @@
 
     @keyframes slide-in {
         from {
-            transform: translateY(20px);
+            transform: translateX(20px);
         }
         to {
-            transform: translateY(0px);
+            transform: translateX(0px);
         }
     }
     @keyframes slide-out {
         from {
-            transform: translateY(0px);
+            transform: translateX(0px);
         }
         to {
-            transform: translateY(20px);
+            transform: translateX(20px);
         }
     }
 </style>
