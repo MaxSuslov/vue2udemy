@@ -13,6 +13,8 @@
                 </div>
                 <button @click="submit" class="btn btn-primary">Submit</button>
                 <hr>
+                <input type="text" class="form-control" v-model="node">
+                <br>
                 <button class="btn btn-primary" @click="fetchData">Get Data</button>
                 <br>
                 <br>
@@ -33,7 +35,8 @@
                     email: ''
                 },
                 users: [],
-                resource: {}
+                resource: {}, 
+                node: 'data'
             }
         }, 
         methods: {
@@ -48,12 +51,20 @@
                 this.resource.saveAlt(this.user);
             }, 
             fetchData() {
-                this.$http.get('data.json')
-                .then(response => {
-                    // It returns a promise, not the data right away
-                    return response.json(); 
-                })
-                    // .json() extracts the value of the response and converts it into a JS object. 
+                // this.$http.get('data.json')
+                // .then(response => {
+                //     // It returns a promise, not the data right away
+                //     return response.json(); 
+                // })
+                //     // .json() extracts the value of the response and converts it into a JS object. 
+                // .then(data => {
+                //     const resultArray = [];
+                //     for (let key in data) {
+                //         resultArray.push(data[key]);
+                //     }
+                //     this.users = resultArray;
+                // });
+                this.resource.getData({node: this.node})
                 .then(data => {
                     const resultArray = [];
                     for (let key in data) {
@@ -65,9 +76,10 @@
         },
         created() {
             const customActions = {
-                saveAlt: {method: 'POST', url: 'alternative.json'}
+                saveAlt: {method: 'POST', url: 'alternative.json'},
+                getData: {method: 'GET'}
             }
-            this.resource = this.$resource('data.json', {}, customActions);
+            this.resource = this.$resource('{node}.json', {}, customActions);
         }
     }
 </script>

@@ -10,7 +10,8 @@ Vue.http.options.root =
 
 Vue.http.interceptors.push((request, next) => {
   console.log(request);
-  if ((request.method = 'POST')) {
+  // Here was an error, '=' was wrong instead of comparison '=='
+  if (request.method == 'POST') {
     request.method = 'PUT';
   }
   next((response) => {
