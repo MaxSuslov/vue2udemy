@@ -29,7 +29,14 @@
         }, 
         methods: {
             submit() {
-                console.log(this.user)
+                // $http is enabled by VueResource; Firebase accepts only requests to .json, so we add at the end of the DB URL /data.json (name is up to you)
+                this.$http.post('https://vue-http-aebd5-default-rtdb.europe-west1.firebasedatabase.app/data.json', this.user)
+                // in POST request the 1st argument is the DB URL, the second argument is data that we want to send. It returns a promise, so we write .then() to execute it after we get back a response to our request.
+                .then(response => {
+                    console.log(response);
+                }, error => {
+                    console.log(error);
+                });
             }
         }
     }
