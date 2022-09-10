@@ -32,22 +32,22 @@
                     username: '',
                     email: ''
                 },
-                users: []
+                users: [],
+                resource: {}
             }
         }, 
         methods: {
             submit() {
-                // $http is enabled by VueResource; Firebase accepts only requests to .json, so we add at the end of the DB URL /data.json (name is up to you)
-                this.$http.post('', this.user)
-                // in POST request the 1st argument is the DB URL, the second argument is data that we want to send. It returns a promise, so we write .then() to execute it after we get back a response to our request.
-                .then(response => {
-                    console.log(response);
-                }, error => {
-                    console.log(error);
-                });
+                // this.$http.post('data.json', this.user)
+                // .then(response => {
+                //     console.log(response);
+                // }, error => {
+                //     console.log(error);
+                // });
+                this.resource.save({}, this.user);
             }, 
             fetchData() {
-                this.$http.get('')
+                this.$http.get('data.json')
                 .then(response => {
                     // It returns a promise, not the data right away
                     return response.json(); 
@@ -61,6 +61,9 @@
                     this.users = resultArray;
                 });
             }
+        },
+        created() {
+            this.resource = this.$resource('data.json');
         }
     }
 </script>

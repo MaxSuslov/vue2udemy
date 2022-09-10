@@ -6,7 +6,7 @@ Vue.use(VueResource);
 
 // .http without $ - use .$http only from inside of your Vue instances!
 Vue.http.options.root =
-  'https://vue-http-aebd5-default-rtdb.europe-west1.firebasedatabase.app/data.json';
+  'https://vue-http-aebd5-default-rtdb.europe-west1.firebasedatabase.app/';
 
 Vue.http.interceptors.push((request, next) => {
   console.log(request);
