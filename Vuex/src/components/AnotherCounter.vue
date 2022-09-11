@@ -9,11 +9,10 @@
     export default {
         methods: {
             increment() {
-// We access the $store as before, then we commit the mutation with the name of the mutation AS A STRING! Vue.js will search for a method named 'increment' in our mutations object in store.js
-                this.$store.commit('increment');
+                this.$store.state.counter++;
             },
             decrement() {
-                this.$store.commit('decrement');
+                this.$store.state.counter--;
             }
         }
     }
