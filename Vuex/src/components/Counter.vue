@@ -6,14 +6,15 @@
 </template>
 
 <script>
-    export default {
+import { mapMutations } from 'vuex';
+export default {
         methods: {
-            increment() {
-// We access the $store as before, then we commit the mutation with the name of the mutation AS A STRING! Vue.js will search for a method named 'increment' in our mutations object in store.js
-                this.$store.commit('increment');
-            },
-            decrement() {
-                this.$store.commit('decrement');
+            ...mapMutations([
+                'increment',
+                'decrement'
+            ]),
+            ourOwnMethod() {
+                someMethod
             }
         }
     }
