@@ -25,5 +25,18 @@ export const store = new Vuex.Store({
     decrement: (state) => {
       state.counter--;
     }
+  },
+  // no issue with the same naming as in mutations, these are another objects, holding functions/methods, which are our actions
+  actions: {
+    // context is an argument which is passed by vuex automatically. Context gives us access to .commit() method. It is an extra step, instead of doing it inside of the component. Context object has a lot of methods of our store (not all features, but all we need here)
+    increment: (context) => {
+      context.commit('increment');
+    }
   }
+  // another syntax (ES6 destructuring feature)
+  // actions: {
+  //   increment: ({ commit }) => {
+  //     commit('increment');
+  //   }
+  // }
 });
