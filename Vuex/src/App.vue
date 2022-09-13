@@ -6,7 +6,10 @@
                 <app-result></app-result>
                 <app-another-result></app-another-result>
                 <hr>
+                <p>Counter buttons:</p>
                 <app-counter></app-counter>
+                <br><br>
+                <p>anotherCounter buttons:</p>
                 <app-another-counter></app-another-counter>
             </div>
         </div>
