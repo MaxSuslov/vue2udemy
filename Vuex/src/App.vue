@@ -11,6 +11,13 @@
                 <br><br>
                 <p>anotherCounter buttons:</p>
                 <app-another-counter></app-another-counter>
+                <hr>
+                <!-- v-model will not work, "value" is a computed property, and it only returns us a value, it will not change the state! -->
+                <!-- <input type="text" v-model="value"> -->
+
+                <input type="text" :value="value" @input="updateValue">
+                <br>
+                <p>{{ value }}</p>
             </div>
         </div>
     </div>
@@ -24,6 +31,16 @@
 
 
     export default {
+        computed: {
+            value() {
+                return this.$store.getters.value;
+            }
+        },
+        methods: {
+            updateValue(event) {
+                this.$store.dispatch('updateValue', event.target.value);
+            }
+        },
         components: {
             appCounter: Counter,
             appResult: Result,
