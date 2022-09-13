@@ -8,7 +8,6 @@ import * as getters from './getters';
 
 Vue.use(Vuex);
 
-// .store() is a method containing an object where we configure that store
 export const store = new Vuex.Store({
   state: {
     value: 0

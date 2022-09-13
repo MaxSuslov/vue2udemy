@@ -7,13 +7,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import * as types from '../state/types'
     export default {
         computed: {
-// without spread operator '...' it will not work (object directly inside of an object). The ... tells JS: please, pull out all the properties and methods in the object you have here and create separate key:value pairs for each of them.
-          ...mapGetters([
-          'doubleCounter',
-          'counterString'
-        ])
+          ...mapGetters({
+            doubleCounter: types.DOUBLE_COUNTER,
+            counterString: types.CLICK_COUNTER
+          })
       }
     }
 </script>

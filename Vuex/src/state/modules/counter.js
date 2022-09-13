@@ -1,12 +1,15 @@
+import * as types from '../types';
+
 const state = {
   counter: 0
 };
 
 const getters = {
-  doubleCounter: (state) => {
+  // ES6 syntax for dynamically setting the name. It will be a string at the end
+  [types.DOUBLE_COUNTER]: (state) => {
     return state.counter * 2;
   },
-  counterString: (state) => {
+  [types.CLICK_COUNTER]: (state) => {
     return state.counter + ' Clicks';
   }
 };
