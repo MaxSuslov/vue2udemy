@@ -15,7 +15,10 @@
                 <!-- v-model will not work, "value" is a computed property, and it only returns us a value, it will not change the state! -->
                 <!-- <input type="text" v-model="value"> -->
 
-                <input type="text" :value="value" @input="updateValue">
+                <!-- It works, but using a setter is a more elegant solution -->
+                <!-- <input type="text" :value="value" @input="updateValue"> -->
+
+                <input type="text" v-model="value">
                 <br>
                 <p>{{ value }}</p>
             </div>
@@ -32,8 +35,13 @@
 
     export default {
         computed: {
-            value() {
-                return this.$store.getters.value;
+            value: {
+                get() {
+                    return this.$store.getters.value;
+                }, 
+                set(value) {
+                    this.$store.dispatch('updateValue', value)
+                }
             }
         },
         methods: {
