@@ -16,7 +16,7 @@ import axios from 'axios';
       }
     },
     created() {
-      axios.get('https://axios-e474e-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+      axios.get('/users.json')
       .then(res => {
         console.log(res)
         // we extract data from the response
@@ -24,8 +24,6 @@ import axios from 'axios';
         const users = []
         // we schould loop through keys
         for (let key in data) {
-          // it would be the value for this cryptic key
-          // users.push(data[key])
           const user = data[key]
           // we write the cryptic id to a new property (id) to keep it and not to lose
           user.id = key
