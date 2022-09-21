@@ -34,26 +34,25 @@ const actions = {
 };
 
 const getters = {
-  stockPortfolio (state, getters) {
-    return state.stocks.map(stock => {
-      const record = getters.stocks.find(element => element.id == stock.id);
+  stockPortfolio(state, getters) {
+    return state.stocks.map((stock) => {
+      const record = getters.stocks.find((element) => element.id == stock.id);
       return {
         id: stock.id,
         quanitiy: stock.quanitiy,
         name: record.name,
         price: record.price
-      }
+      };
     });
-  }
+  },
   funds(state) {
     return state.funds;
   }
 };
-
 
 export default {
   state,
   mutations,
   actions,
   getters
-}
+};
