@@ -7,7 +7,9 @@
           <input
                   type="email"
                   id="email"
+                  @input="$v.email.$touch()"
                   v-model="email">
+          <div>{{ $v }}</div>
         </div>
         <div class="input">
           <label for="age">Your Age</label>
@@ -69,6 +71,7 @@
 </template>
 
 <script>
+import { required, email } from 'vuelidate/lib/validators'
   export default {
     data () {
       return {
@@ -79,6 +82,12 @@
         country: 'usa',
         hobbyInputs: [],
         terms: false
+      }
+    },
+    validations: {
+      email: {
+        required,
+        email
       }
     },
     methods: {
