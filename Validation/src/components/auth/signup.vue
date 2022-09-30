@@ -66,8 +66,14 @@
             </div>
           </div>
         </div>
-        <div class="input inline">
-          <input type="checkbox" id="terms" v-model="terms">
+        <!-- We use .$invalid instead of .$error here, but it doesn't work, looks like the npm package is deprecated! -->
+        <!-- <div class="input inline" :class="{invalid: !$v.terms.$invalid}"> -->
+        <div class="input inline"">
+          <input
+                  type="checkbox"
+                  id="terms"
+                  @change="$v.terms.$touch()"
+                  v-model="terms">
           <label for="terms">Accept Terms of Use</label>
         </div>
         <div class="submit">
@@ -79,7 +85,7 @@
 </template>
 
 <script>
-import { required, email, numeric, minValue, minLength, sameAs } from 'vuelidate/lib/validators'
+import { required, email, numeric, minValue, minLength, sameAs, requiredUnless } from 'vuelidate/lib/validators'
   export default {
     data () {
       return {
@@ -111,11 +117,16 @@ import { required, email, numeric, minValue, minLength, sameAs } from 'vuelidate
         // First option for sameAs() is to provide the property name which you are comparing with (as string)
         sameAs: sameAs('password')
         // The second option is to pass to sameAs a function or an arrow function. This function receives one argument which is the Vue instance of this component, and returns the property we compare with. A use case could be if we need to add something to the first password in the second one, e.g. return vm.password + 'b' to pass the check.
-        sameAs: sameAs(vm => {
-          return vm.password
-        })
+        // sameAs: sameAs(vm => {
+        //   return vm.password
+        // })
       }
     },
+      terms: {
+        required: requiredUnless(vm => {
+          return vm.country === 'germany'
+        })
+      },
     methods: {
       onAddHobby () {
         const newHobby = {
