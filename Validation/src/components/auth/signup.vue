@@ -56,23 +56,24 @@
             <div
                     class="input"
                     v-for="(hobbyInput, index) in hobbyInputs"
+                    :class="{invalid: $v.hobbyInputs.$each[index].$error}"
                     :key="hobbyInput.id">
               <label :for="hobbyInput.id">Hobby #{{ index }}</label>
               <input
                       type="text"
                       :id="hobbyInput.id"
+                      @blur="$v.hobbyInputs.$each[index].value.$touch()"
                       v-model="hobbyInput.value">
               <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
+              <p v-if="!$v.hobbyInputs.minLen">You have to specify at least {{ $v.hobbyInputs.$params.minLen.min }} hobbies.</p>
+              <p v-if="!$v.hobbyInputs.required">Please add hobbies.</p>
             </div>
           </div>
         </div>
-        <!-- We use .$invalid instead of .$error here, but it doesn't work, looks like the npm package is deprecated! -->
-        <!-- <div class="input inline" :class="{invalid: !$v.terms.$invalid}"> -->
-        <div class="input inline"">
+        <div class="input inline">
           <input
                   type="checkbox"
                   id="terms"
-                  @change="$v.terms.$touch()"
                   v-model="terms">
           <label for="terms">Accept Terms of Use</label>
         </div>
@@ -113,20 +114,19 @@ import { required, email, numeric, minValue, minLength, sameAs, requiredUnless }
         minLen: minLength(6)
       },
       confirmPassword: {
-        // we don't need to check for required and minLenght here, we just need to make sure it matches the first password input
-        // First option for sameAs() is to provide the property name which you are comparing with (as string)
         sameAs: sameAs('password')
-        // The second option is to pass to sameAs a function or an arrow function. This function receives one argument which is the Vue instance of this component, and returns the property we compare with. A use case could be if we need to add something to the first password in the second one, e.g. return vm.password + 'b' to pass the check.
-        // sameAs: sameAs(vm => {
-        //   return vm.password
-        // })
+      },
+      hobbyInputs: {
+        required,
+        minLen: minLength(2),
+        $each: {
+          value: {
+            required,
+            minLen: minLength(5)
+          }
+        }
       }
     },
-      terms: {
-        required: requiredUnless(vm => {
-          return vm.country === 'germany'
-        })
-      },
     methods: {
       onAddHobby () {
         const newHobby = {
