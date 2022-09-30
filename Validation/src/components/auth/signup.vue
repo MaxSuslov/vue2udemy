@@ -103,7 +103,10 @@ import { required, email, numeric, minValue, minLength, sameAs, requiredUnless }
     validations: {
       email: {
         required,
-        email
+        email,
+        unique: val => {
+          return val !== 'test@test.com'
+        }
       },
       age: {
         required,
