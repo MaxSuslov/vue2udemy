@@ -24,18 +24,20 @@
                   v-model.number="age">
             <p v-if="!$v.age.minVal">You have to be at least {{ $v.age.$params.minVal.min }} years old.</p>
         </div>
-        <div class="input">
+        <div class="input" :class="{invalid: $v.password.$error}">
           <label for="password">Password</label>
           <input
                   type="password"
                   id="password"
+                  @blur="$v.password.$touch()"
                   v-model="password">
         </div>
-        <div class="input">
+        <div class="input" :class="{invalid: $v.confirmPassword.$error}">
           <label for="confirm-password">Confirm Password</label>
           <input
                   type="password"
                   id="confirm-password"
+                  @blur="$v.confirmPassword.$touch()"
                   v-model="confirmPassword">
         </div>
         <div class="input">
@@ -77,7 +79,7 @@
 </template>
 
 <script>
-import { required, email, numeric, minValue } from 'vuelidate/lib/validators'
+import { required, email, numeric, minValue, minLength, sameAs } from 'vuelidate/lib/validators'
   export default {
     data () {
       return {
@@ -99,6 +101,19 @@ import { required, email, numeric, minValue } from 'vuelidate/lib/validators'
         required,
         numeric,
         minVal: minValue(18)
+      },
+      password: {
+        req: required,
+        minLen: minLength(6)
+      },
+      confirmPassword: {
+        // we don't need to check for required and minLenght here, we just need to make sure it matches the first password input
+        // First option for sameAs() is to provide the property name which you are comparing with (as string)
+        sameAs: sameAs('password')
+        // The second option is to pass to sameAs a function or an arrow function. This function receives one argument which is the Vue instance of this component, and returns the property we compare with. A use case could be if we need to add something to the first password in the second one, e.g. return vm.password + 'b' to pass the check.
+        sameAs: sameAs(vm => {
+          return vm.password
+        })
       }
     },
     methods: {
