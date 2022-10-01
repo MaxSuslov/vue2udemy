@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'https://vue-update-auth-a79e9-default-rtdb.europe-west1.firebasedatabase.app/'
+  baseURL: 'https://identitytoolkit.googleapis.com/v1'
 })
 
-instance.defaults.headers.common['SOMETHING'] = 'something'
+// instance.defaults.headers.common['SOMETHING'] = 'something'
 
 export default instance
