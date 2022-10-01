@@ -66,8 +66,9 @@
                       v-model="hobbyInput.value">
               <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
               <p v-if="!$v.hobbyInputs.minLen">You have to specify at least {{ $v.hobbyInputs.$params.minLen.min }} hobbies.</p>
-              <p v-if="!$v.hobbyInputs.required">Please add hobbies.</p>
+
             </div>
+            <p v-if="!$v.hobbyInputs.required">Please add hobbies.</p>
           </div>
         </div>
         <div class="input inline">
@@ -105,11 +106,10 @@ import { required, email, numeric, minValue, minLength, sameAs, requiredUnless }
         required,
         email,
         unique: val => {
-          // if the input is empty, this is handled as true, this validator doesn't care about emptiness, it is the task for other validators like 'required'. We just want to make sure our async code won't run if the input is empty, we just return.
           if (val === '') return true
           return axios.get('/users.json?orderBy="email"&equalTo="' + val + '"')
           .then(res => {
-          // if we get an empty object in response, we know that this email is not taken yet, so we return true
+            console.log(res)
             return Object.keys(res.data).length === 0
           })
         }
