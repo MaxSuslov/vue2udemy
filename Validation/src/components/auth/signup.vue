@@ -107,10 +107,10 @@ import { required, email, numeric, minValue, minLength, sameAs, requiredUnless }
         unique: val => {
           // if the input is empty, this is handled as true, this validator doesn't care about emptiness, it is the task for other validators like 'required'. We just want to make sure our async code won't run if the input is empty, we just return.
           if (val === '') return true
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve(val !== 'test@test.com')
-            }, 1000)
+          return axios.get('/users.json?orderBy="email"&equalTo="' + val + '"')
+          .then(res => {
+          // if we get an empty object in response, we know that this email is not taken yet, so we return true
+            return Object.keys(res.data).length === 0
           })
         }
       },
