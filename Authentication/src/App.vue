@@ -11,6 +11,10 @@
     name: 'app',
     components: {
       'app-header': Header
+    },
+// Check if token (stored in localStorage) is not expired (see the logic in store.js) 
+    created () {
+      this.$store.dispatch('tryAutoLogin')
     }
   }
 </script>

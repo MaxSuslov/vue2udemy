@@ -46,6 +46,13 @@ export default new Vuex.Store({
             token: res.data.idToken,
             userId: res.data.localId
           })
+          const now = new Date()
+      // .getTime() automatically converts time into ms
+          const expirationDate = new Date(now.getTime() + res.data.expiresIn * 1000)
+      // Storing token in localStorage (using browser API) to persist the logged in state after reloading the page
+          localStorage.setItem('token', res.data.idToken)
+          localStorage.setItem('userId', res.data.localId)
+          localStorage.setItem('expirationDate', expirationDate)
           dispatch('storeUser', authData)
           dispatch('setLogoutTimer', res.data.expiresIn)
         })
@@ -59,6 +66,13 @@ export default new Vuex.Store({
       })
       .then(res => {
         console.log(res)
+        const now = new Date()
+        const expirationDate = new Date(now.getTime() + res.data.expiresIn * 1000)
+        localStorage.setItem('token', res.data.idToken)
+        localStorage.setItem('userId', res.data.localId)
+        localStorage.setItem('expirationDate', expirationDate)
+        dispatch('storeUser', authData)
+        dispatch('setLogoutTimer', res.data.expiresIn)
         commit('authUser', {
           token: res.data.idToken,
           userId: res.data.localId
@@ -67,8 +81,29 @@ export default new Vuex.Store({
       })
         .catch(error => console.log(error))
     },
+// Check if the user is still logged in (if the token is expired or not), when the app is started (see created() hook in App.vue)
+    tryAutoLogin ({commit}) {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        return
+      }
+      const expirationDate = localStorage.getItem('expirationDate')
+      const now = new Date()
+      if (now >= expirationDate) {
+        return
+      }
+      const userId = localStorage.getItem('userId')
+      commit('authUser', {
+        token: token,
+        userId: userId
+      })
+    },
     logout ({commit}) {
       commit('clearAuthData')
+    // localStorage.clear() would be also an option if we want to completely clear it, but if we have multiple items we don't want destroy, use .removeItem('item') instead
+      localStorage.removeItem('expirationDate')
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
       router.replace('/signin')
     },
     storeUser({commit, state}, userData) {
