@@ -27,9 +27,15 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    // we get expiresIn (3600) seconds (1 hour token expiration time) and multiply it by 1000 (milliseconds)
+    setLogoutTimer ({commit}, expirationTime) {
+      setTimeout(() => {
+    // Alternatively, dispatch('logout') here - this would also redirect the user to /signin
+        commit('clearAuthData')
+      }, expirationTime * 1000)
+    },
     signup({commit, dispatch}, authData) {
       axios.post('/accounts:signUp?key=AIzaSyCqAR2rGDkBDn2aZ9EKzYViO-bg2oCWYBo', {
-  // We use here only email and password from the whole formData object passed from signup component (here named as authData), but once the user is created and we get the token, we pass (dispatch) the upgraded authData object to the 'storeUser' action to register our new user in the realtime DB 'users' database
         email: authData.email,
         password: authData.password,
         returnSecureToken: true
@@ -41,10 +47,11 @@ export default new Vuex.Store({
             userId: res.data.localId
           })
           dispatch('storeUser', authData)
+          dispatch('setLogoutTimer', res.data.expiresIn)
         })
         .catch(error => console.log(error))
     },
-    login({commit}, authData) {
+    login({commit, dispatch}, authData) {
       axios.post('/accounts:signInWithPassword?key=AIzaSyCqAR2rGDkBDn2aZ9EKzYViO-bg2oCWYBo', {
         email: authData.email,
         password: authData.password,
@@ -56,6 +63,7 @@ export default new Vuex.Store({
           token: res.data.idToken,
           userId: res.data.localId
         })
+        dispatch('setLogoutTimer', res.data.expiresIn)
       })
         .catch(error => console.log(error))
     },
