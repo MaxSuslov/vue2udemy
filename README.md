@@ -7,3 +7,6 @@ To run the project:
   <li>run <code>npm run dev</code> to run the project on local server</li>
   <li>open <a href="http://localhost:8080/">http://localhost:8080/</a></li>
 </ul>
+Deployed projects from this course:
+<ul>
+  <li>Final project <a href="http://vue2udemy.s3-website.eu-central-1.amazonaws.com/">deployed on AWS</a></li>
