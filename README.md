@@ -10,5 +10,7 @@ To run the project:
 Deployed projects from this course deployed on AWS:
 <ul>
   <li><a href="http://vue2udemy.s3-website.eu-central-1.amazonaws.com/" target="_blank">Final project</a></li>
-  <li><a href="http://vue2auth.s3-website.eu-central-1.amazonaws.com/" target="_blank">Authentication</a></li>
+  <li><a href="http://vue2auth.s3-website.eu-central-1.amazonaws.com/" target="_blank">Authentication (no validation here)</a></li>
+  <li><a href="http://signup-validation.s3-website.eu-central-1.amazonaws.com/signup" target="_blank">Validation on sign-up page</a></li>
+  <li><a href="http://monster-slayer.s3-website.eu-central-1.amazonaws.com/" target="_blank">Monster-Slayer Game</a></li>
  </ul>
