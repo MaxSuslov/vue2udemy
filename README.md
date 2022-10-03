@@ -9,4 +9,4 @@ To run the project:
 </ul>
 Deployed projects from this course:
 <ul>
-  <li>Final project <a href="http://vue2udemy.s3-website.eu-central-1.amazonaws.com/">deployed on AWS</a></li>
+  <li>Final project <a href="http://vue2udemy.s3-website.eu-central-1.amazonaws.com/" target="_blank">deployed on AWS</a></li>
