@@ -10,7 +10,7 @@ To run the project:
 If you are running into some errors while compiling, install and use an older version of node (^8.17.0 || 8.19.2)
 <br>
 <br>
-Deployed projects from this course deployed on AWS:
+Some projects from this course (deployed on AWS):
 <ul>
   <li><a href="http://vue2udemy.s3-website.eu-central-1.amazonaws.com/" target="_blank">Final project</a></li>
   <li><a href="http://vue2auth.s3-website.eu-central-1.amazonaws.com/" target="_blank">Authentication (no validation here)</a></li>
